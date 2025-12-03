@@ -118,9 +118,7 @@ class PreTrainer:
                 if patience_counter >= patience_limit:
                     print(f"Early stopping at epoch {epoch}")
                     break
-            print(f"Epoch {epoch}: Train Loss={train_loss:.4f}, Val Loss={val_loss:.4f}, Val Acc={val_acc:.4f}")
         test_acc, test_rul_mse = self.test_epoch()
-        print(f'Test Acc: {test_acc:.4f}, Test RUL MSE: {test_rul_mse:.4f}')
 
 if __name__ == "__main__":
     trainer = PreTrainer()

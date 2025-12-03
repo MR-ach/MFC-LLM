@@ -34,7 +34,7 @@ class HyperParameters:
         self.per_device_train_batch_size = 1
         self.gradient_accumulation_steps = 4
         self.logging_steps = 20
-        self.num_train_epochs = 10
+        self.num_train_epochs = 50
         self.save_steps = 2125
         self.learning_rate = 1e-4
         self.lr_scheduler_type = 'cosine'
