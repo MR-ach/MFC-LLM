@@ -42,7 +42,7 @@ def create_cache_dataset():
         label_groups[label].append((condition_id, file_id, label, float(rul)))
 
     dataset_info = {subset: [] for subset in ['train', 'val', 'test']}
-    val_id_records = []   
+    train_id_records = []   
     test_id_records = []  
 
     for label, samples in label_groups.items():
@@ -65,7 +65,7 @@ def create_cache_dataset():
                         record = [file_id, r_id, label, rul]
                         dataset_info[subset_name].append([file_id, r_id, label, rul])
                         if subset_name == 'train':
-                            val_id_records.append({
+                            train_id_records.append({
                                 "file_id": file_id,
                                 "ref_id": r_id,
                                 "label": label,
