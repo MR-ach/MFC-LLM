@@ -3,9 +3,9 @@ import random
 import os
 import sqlite3
 # ---------------- 配置 -----------------
-val_id_path = "/home/hzm/MFC-LLM/data/PHM2012_data_val_ids.json"
+val_id_path = "/home/hzm/MFC-LLM/data/PHM2012_data_train_ids.json"
 output_json = "/home/hzm/MFC-LLM/data/PHM2012_data_corpus.json"
-num_per_task = 500  # 每类任务生成数量
+num_per_task = 5000  # 每类任务生成数量
 
 # 标签映射
 label_map = {

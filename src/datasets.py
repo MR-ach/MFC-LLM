@@ -11,7 +11,7 @@ data_path = '/home/hzm/MFC-LLM/data/PHM2012_data.hdf5'
 meta_path = '/home/hzm/MFC-LLM/data/PHM2012_data.sqlite'
 cache_path = '/home/hzm/MFC-LLM/data/PHM2012_data.json'
 corpus_path = '/home/hzm/MFC-LLM/data/PHM2012_data_corpus.json'
-val_id_path = '/home/hzm/MFC-LLM/data/PHM2012_data_val_ids.json'
+train_id_path = '/home/hzm/MFC-LLM/data/PHM2012_data_train_ids.json'
 test_id_path = '/home/hzm/MFC-LLM/data/PHM2012_data_test_ids.json'
 
 def get_ref_ids():
@@ -64,7 +64,7 @@ def create_cache_dataset():
                     for r_id in r_ids:
                         record = [file_id, r_id, label, rul]
                         dataset_info[subset_name].append([file_id, r_id, label, rul])
-                        if subset_name == 'val':
+                        if subset_name == 'train':
                             val_id_records.append({
                                 "file_id": file_id,
                                 "ref_id": r_id,
@@ -72,7 +72,7 @@ def create_cache_dataset():
                                 "rul": rul,
                                 "condition_id": condition_id
                             })
-                        if subset_name == 'test':
+                        if subset_name == 'test' or subset_name == 'val':
                             test_id_records.append({
                                 "file_id": file_id,
                                 "ref_id": r_id,
@@ -84,8 +84,8 @@ def create_cache_dataset():
     with open(cache_path, 'w') as f:
         json.dump(dataset_info, f, indent=2)
 
-    with open(val_id_path, 'w') as f:
-        json.dump(val_id_records, f, indent=2)   
+    with open(train_id_path, 'w') as f:
+        json.dump(train_id_records, f, indent=2)   
 
     with open(test_id_path, 'w') as f:
         json.dump(test_id_records, f, indent=2)
