@@ -1,3 +1,4 @@
+```markdown
 # MFC-LLM
 # MFC-LLM Running Guide
 
@@ -10,6 +11,7 @@
 Install project dependencies with the following command:
 ```bash
 pip install -r requirements.txt
+
 ```
 
 > Note: If dependency conflicts occur during installation, try upgrading pip or using a virtual environment for isolation:
@@ -21,70 +23,111 @@ pip install -r requirements.txt
 > # Activate virtual environment on Linux/Mac
 > source mfc-env/bin/activate
 > pip install -r requirements.txt
+> 
 > ```
+> 
+> 
 
 ## 2. Model Weight Download
+
 Download the Qwen2.5-1.5B model from Hugging Face and place it in the specified directory:
+
 1. Visit the Hugging Face model repository: [Qwen/Qwen2.5-1.5B](https://huggingface.co/Qwen/Qwen2.5-1.5B)
 2. Download all complete model files (including config.json, model-00001-of-00002.safetensors, etc.)
 3. Create the path `MFC-LLM/LLM/qwen_weight` in the project root directory (if it doesn't exist)
 4. Copy all downloaded model files to the `qwen_weight` directory. The final directory structure should be:
-   ```
-   MFC-LLM/
-   └── LLM/
-       └── qwen_weight/
-           ├── config.json
-           ├── model-00001-of-00002.safetensors
-           ├── model-00002-of-00002.safetensors
-           ├── tokenizer_config.json
-           └── tokenizer.model
-   ```
+```
+MFC-LLM/
+└── LLM/
+    └── qwen_weight/
+        ├── config.json
+        ├── model-00001-of-00002.safetensors
+        ├── model-00002-of-00002.safetensors
+        ├── tokenizer_config.json
+        └── tokenizer.model
+
+```
+
+
 
 > Optional: Auto-download using Hugging Face `transformers` (install `huggingface-hub` first):
 > ```bash
 > pip install huggingface-hub
 > huggingface-cli download Qwen/Qwen2.5-1.5B --local-dir MFC-LLM/LLM/qwen_weight --local-dir-use-symlinks False
+> 
 > ```
+> 
+> 
 
-## 3. Path Configuration Modification
+## 3. Dataset Preparation
+
+Download the **hzmmmm/PHM2012_LLM** dataset from Hugging Face and organize it within the project:
+
+1. Visit the dataset repository: [hzmmmm/PHM2012_LLM](https://www.google.com/search?q=https://huggingface.co/datasets/hzmmmm/PHM2012_LLM)
+2. Create the directory `MFC-LLM/Dataset` (or your preferred data path).
+3. Download the dataset using the CLI (recommended to ensure file integrity).
+
+**Using Hugging Face CLI:**
+
+```bash
+# Ensure huggingface-hub is installed
+pip install huggingface-hub
+
+# Download dataset to the specified local directory
+huggingface-cli download hzmmmm/PHM2012_LLM --repo-type dataset --local-dir MFC-LLM/Dataset --local-dir-use-symlinks False
+
+```
+
+## 4. Path Configuration Modification
+
 Modify all path-related configurations in the project according to your actual deployment environment:
-- Model weight path: Ensure the model loading path in the code points to `MFC-LLM/LLM/qwen_weight`
-- Dataset path: Update the reading path for pre-training/fine-tuning datasets
-- Output path: Specify the save path for model checkpoints and log files
-- Other paths: Adjust paths for configuration files, cache files, etc. (locate via code search)
+
+* **Model weight path:** Ensure the model loading path in the code points to `MFC-LLM/LLM/qwen_weight`
+* **Dataset path:** Update the reading path for pre-training/fine-tuning datasets to point to `MFC-LLM/Dataset` (or where you downloaded it in Step 3)
+* **Output path:** Specify the save path for model checkpoints and log files
+* **Other paths:** Adjust paths for configuration files, cache files, etc. (locate via code search)
 
 > Tip: Use global search for keywords like `path`, `dir`, or `load_from` to quickly find path configurations that need modification.
 
-## 4. Pre-training
+## 5. Pre-training
+
 After completing the above preparations, run the pre-training script:
+
 ```bash
 python pre_training.py
+
 ```
 
 > Note:
-> - Pre-training may take a long time. Adjust parameters like batch_size based on your GPU performance.
-> - If training is interrupted, check if the script supports resuming from checkpoints or restart the training process.
+> * Pre-training may take a long time. Adjust parameters like batch_size based on your GPU performance.
+> * If training is interrupted, check if the script supports resuming from checkpoints or restart the training process.
+> 
+> 
 
-## 5. Fine-tuning
+## 6. Fine-tuning
+
 After pre-training is complete, run the fine-tuning script:
+
 ```bash
 python fine_tuning.py
+
 ```
 
 > Explanation:
-> - Fine-tuning relies on pre-trained model checkpoints. Ensure the script correctly configures the path to load the pre-trained model.
-> - Adjust hyperparameters like learning rate and training epochs according to task requirements.
+> * Fine-tuning relies on pre-trained model checkpoints. Ensure the script correctly configures the path to load the pre-trained model.
+> * Adjust hyperparameters like learning rate and training epochs according to task requirements.
+> 
+> 
 
 ## Common Issues
+
 1. Dependency installation failures: Verify Python version compatibility or install specific dependency versions manually.
-2. Slow model download: Use a Hugging Face mirror or manually download and upload files to the server.
+2. Slow download: Use a Hugging Face mirror or manually download and upload files to the server.
 3. Insufficient VRAM during training: Reduce batch_size, use gradient accumulation, or switch to a GPU with larger VRAM.
 4. Path errors: Double-check all path configurations to match the actual file locations.
 
 For other issues, refer to project log files or submit an Issue for support.
 
----
+```
 
-Copy the above content into a text file and name it `README.md` for direct use.
-
-Do you need me to generate a **formatted .md file** that you can download directly, or adjust any sections for more clarity (e.g., adding parameter descriptions for training scripts)?
+```
