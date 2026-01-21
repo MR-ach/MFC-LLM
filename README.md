@@ -63,22 +63,24 @@ MFC-LLM/
 Download the **hzmmmm/PHM2012_LLM** dataset from Hugging Face and organize it within the project:
 
 1. Visit the dataset repository: [hzmmmm/PHM2012_LLM](https://huggingface.co/datasets/hzmmmm/PHM2012_LLM)
-2. Create the directory `MFC-LLM/data` .
+2. Create the directory `MFC-LLM/data`.
 3. Copy all downloaded model files to the `data` directory. The final directory structure should be:
 ```
 MFC-LLM/
 └── data/
-    └── PHM2012_data.hdf5
+    ├── PHM2012_data.hdf5
     └── PHM2012_data.sqlite
 
 ```
+
+
 
 ## 4. Path Configuration Modification
 
 Modify all path-related configurations in the project according to your actual deployment environment:
 
 * **Model weight path:** Ensure the model loading path in the code points to `MFC-LLM/LLM/qwen_weight`
-* **Dataset path:** Update the reading path for pre-training/fine-tuning datasets to point to `MFC-LLM/Dataset` (or where you downloaded it in Step 3)
+* **Dataset path:** Update the reading path for pre-training/fine-tuning datasets to point to `MFC-LLM/data` (matches Step 3)
 * **Output path:** Specify the save path for model checkpoints and log files
 * **Other paths:** Adjust paths for configuration files, cache files, etc. (locate via code search)
 
@@ -99,9 +101,24 @@ python pre_training.py
 > 
 > 
 
-## 6. Fine-tuning
+## 6. Corpus Creation
 
-After pre-training is complete, run the fine-tuning script:
+Before fine-tuning, generate or format the instruction corpus based on the pre-trained data or raw datasets:
+
+```bash
+python corpus_creat.py
+
+```
+
+> Note:
+> * This step prepares the data structure required for the fine-tuning phase.
+> * Ensure the generated corpus is saved to the correct directory anticipated by `fine_tuning.py`.
+> 
+> 
+
+## 7. Fine-tuning
+
+After the corpus is created, run the fine-tuning script:
 
 ```bash
 python fine_tuning.py
@@ -109,12 +126,12 @@ python fine_tuning.py
 ```
 
 > Explanation:
-> * Fine-tuning relies on pre-trained model checkpoints. Ensure the script correctly configures the path to load the pre-trained model.
+> * Fine-tuning relies on pre-trained model checkpoints and the corpus created in Step 6.
 > * Adjust hyperparameters like learning rate and training epochs according to task requirements.
 > 
 > 
 
-## 7. Testing & Inference
+## 8. Testing & Inference
 
 Once fine-tuning is complete, you can evaluate the model's performance or run inference using the test script:
 
@@ -124,7 +141,7 @@ python test.py
 ```
 
 > Note:
-> * Ensure the script is configured to load the best checkpoint saved during the fine-tuning phase (Step 6).
+> * Ensure the script is configured to load the best checkpoint saved during the fine-tuning phase (Step 7).
 > * Results (metrics, logs, or generated text) are typically saved to the output directory defined in configuration.
 > 
 > 
@@ -141,4 +158,3 @@ For other issues, refer to project log files or submit an Issue for support.
 ```
 
 ```
-
