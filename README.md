@@ -64,19 +64,15 @@ MFC-LLM/
 Download the **hzmmmm/PHM2012_LLM** dataset from Hugging Face and organize it within the project:
 
 1. Visit the dataset repository: [hzmmmm/PHM2012_LLM](https://www.google.com/search?q=https://huggingface.co/datasets/hzmmmm/PHM2012_LLM)
-2. Create the directory `MFC-LLM/Dataset` (or your preferred data path).
-3. Download the dataset using the CLI (recommended to ensure file integrity).
-
-**Using Hugging Face CLI:**
-
-```bash
-# Ensure huggingface-hub is installed
-pip install huggingface-hub
-
-# Download dataset to the specified local directory
-huggingface-cli download hzmmmm/PHM2012_LLM --repo-type dataset --local-dir MFC-LLM/Dataset --local-dir-use-symlinks False
-
+2. Create the directory `MFC-LLM/data` .
+3. Copy all downloaded model files to the `data` directory. The final directory structure should be:
 ```
+MFC-LLM/
+└── data/
+    └── PHM2012_data.hdf5
+    └── PHM2012_data.sqlite
+        
+
 
 ## 4. Path Configuration Modification
 
