@@ -71,8 +71,8 @@ MFC-LLM/
 └── data/
     └── PHM2012_data.hdf5
     └── PHM2012_data.sqlite
-        
 
+```
 
 ## 4. Path Configuration Modification
 
@@ -115,6 +115,21 @@ python fine_tuning.py
 > 
 > 
 
+## 7. Testing & Inference
+
+Once fine-tuning is complete, you can evaluate the model's performance or run inference using the test script:
+
+```bash
+python test.py
+
+```
+
+> Note:
+> * Ensure the script is configured to load the best checkpoint saved during the fine-tuning phase (Step 6).
+> * Results (metrics, logs, or generated text) are typically saved to the output directory defined in configuration.
+> 
+> 
+
 ## Common Issues
 
 1. Dependency installation failures: Verify Python version compatibility or install specific dependency versions manually.
@@ -127,3 +142,4 @@ For other issues, refer to project log files or submit an Issue for support.
 ```
 
 ```
+
