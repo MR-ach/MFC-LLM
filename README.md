@@ -62,7 +62,7 @@ MFC-LLM/
 
 Download the **hzmmmm/PHM2012_LLM** dataset from Hugging Face and organize it within the project:
 
-1. Visit the dataset repository: [hzmmmm/PHM2012_LLM](https://www.google.com/search?q=https://huggingface.co/datasets/hzmmmm/PHM2012_LLM)
+1. Visit the dataset repository: [hzmmmm/PHM2012_LLM](https://huggingface.co/datasets/hzmmmm/PHM2012_LLM)
 2. Create the directory `MFC-LLM/data` .
 3. Copy all downloaded model files to the `data` directory. The final directory structure should be:
 ```
