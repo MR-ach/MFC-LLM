@@ -40,11 +40,8 @@ class HyperParameters:
         self.lr_scheduler_type = 'cosine'
 
 description_text = [
-    "Normal Condition",
-    "Inner Race Fault",
-    "Outer Race Fault",
-    "Cage Fault",
-    "Inner Race Fault and Outer Race Fault and Cage Fault and Ball Fault"
+    "Normal",
+    "Fault"
 ]
 
 description_tokens = [
