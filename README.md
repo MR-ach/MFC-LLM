@@ -1,4 +1,3 @@
-```markdown
 # MFC-LLM
 # MFC-LLM Running Guide
 
